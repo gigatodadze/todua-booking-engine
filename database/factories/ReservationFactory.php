@@ -23,8 +23,8 @@ class ReservationFactory extends Factory
             'patient_id' => Patient::query()->inRandomOrder()->value('id'),
             'doctor_id' => Doctor::query()->inRandomOrder()->value('id'),
             'service_id' => Service::query()->inRandomOrder()->value('id'),
-            'reservation_start' => $start,
-            'reservation_end' => $end,
+            'start' => $start,
+            'end' => $end,
         ];
     }
 }

@@ -13,7 +13,7 @@ class Reservation extends Model
         'patient_id',
         'doctor_id',
         'service_id',
-        'reservation_start',
+        'start',
     ];
 
     public function patient()
