@@ -44,9 +44,9 @@ class StoreReservationRequest extends FormRequest
             'start' => ['required', 'string', 'date', 'after:now'],
             'patient.firstname' => ['required', 'string', 'max:255'],
             'patient.lastname' => ['required', 'string', 'max:255'],
-            'patient.phone' => ['required', 'digits:9', 'starts_with:5'],
-            'patient.email' => ['nullable', 'email', 'max:255'],
-            'patient.id_number' => ['required', 'digits:11'],
+            'patient.phone' => ['required', 'string', 'digits:9', 'starts_with:5'],
+            'patient.email' => ['nullable', 'string', 'email:filter,dns', 'max:255'],
+            'patient.id_number' => ['required', 'string', 'digits:11'],
         ];
     }
 
