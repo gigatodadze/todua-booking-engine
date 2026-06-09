@@ -83,7 +83,7 @@ POST /api/reservations
 
 ## Postman Collection
 
-A Postman collection is included in the project for testing the reservation API.
+A [Postman Collection](postman/Todua%20Reservation%20API.postman_collection.json) is included in the project for testing the reservation API.
 
 The Postman collection uses a `base_url` variable.
 Make sure it points to your local project URL.
