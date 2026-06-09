@@ -34,8 +34,9 @@ class StoreReservationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'doctor_id' => ['required', 'integer', 'exists:doctors,id'],
+            'doctor_id' => ['bail','required', 'integer', 'exists:doctors,id'],
             'service_id' => [
+                'bail',
                 'required',
                 'integer',
                 Rule::exists('doctor_service', 'service_id')
@@ -122,7 +123,7 @@ class StoreReservationRequest extends FormRequest
                     ->exists();
 
                 if (!$serviceAvailableAtThatTime) {
-                    $validator->errors()->add('start', 'სერვისი მიუწვდომელია ამ დროს');
+                    $validator->errors()->add('start', 'სერვისი მითითებულ დროს მიუწვდომელია');
 
                     return;
                 }

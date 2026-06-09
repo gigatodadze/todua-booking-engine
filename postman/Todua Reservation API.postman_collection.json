@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "b74c8bbf-31e6-44e9-b7e8-0439a0826841",
+		"name": "Todua Reservation API",
+		"description": "ვინაიდან doctor_service table ში მონაცემები seeder ით რენდომულად ივსება - თუ \"წარმატებული ჯავშნის\" request ზე იღებთ მესიჯს, რომ ექიმს ამ სერვისის შესრულება არ შეუძლია, შეცვალეთ service_id - 1 დან 5-მდე რეინჯში.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22745289"
+	},
+	"item": [
+		{
+			"name": "წარმატებული ჯავშანი.",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 3,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"558 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "არჩეული ექიმი არ არსებობს",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 10,\n  \"service_id\": 5,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"558 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ექიმი არ მუშაობს ამ საათებში",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 3,\n  \"start\": \"2026-06-15, 21:54:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"558 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ექიმს ამ სერვისის შესრულება არ შეუძლია",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 999,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"558 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ტელეფონის ნომერი არასწორია ( უნდა იწყებოდეს 5 ით)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 1,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"158 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ტელეფონის ნომერი უნდა შედგებოდეს 9 ციფრისგან",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 1,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"58 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ნომერის წინსართი +995 ნორმალიზდება სწორ ფორმატში",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 1,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"+995 558 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "პაციენტის სახელი/გვარი/ნომერი სავალდებულოა",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 1,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"\",\n    \"lastname\": \"\",\n    \"phone\": \"\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"12345678911\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "პირადი ნომერი უნდა შედგებოდეს 11 ციფრისგან",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 1,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"+995 558 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"123456aaa91\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "პირადი ნომერი სავალდებულოა",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 1,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"+995 558 31 39 33\",\n    \"email\": \"g.todadze@developers-alliance.com\",\n    \"id_number\": \"\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ელ-ფოსტის ფორმატი არასწორია",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctor_id\": 1,\n  \"service_id\": 1,\n  \"start\": \"2026-06-15, 15:44:00\",\n  \"patient\": {\n    \"firstname\": \"გიგა\",\n    \"lastname\": \"თოდაძე\",\n    \"phone\": \"+995 558 31 39 33\",\n    \"email\": \"g.todadze@giga\",\n    \"id_number\": \"01001212121\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/reservations",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://todua-booking-engine.test",
+			"type": "string"
+		}
+	]
+}
